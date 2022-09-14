@@ -36,8 +36,6 @@ public class App {
 	    header.createCell(0).setCellValue("Repositry");
 	    header.createCell(1).setCellValue("Language");
 	    header.createCell(2).setCellValue("Files Count");
-		// https://github.com/Jatin-Suthar/Burgo-Fee.git
-	    //https://github.com/raghupunk620
 		String path = "https://github.com/TheAlgorithms";
 		int idx_path = path.lastIndexOf('/');
 		String userName = path.substring(idx_path + 1);
@@ -52,7 +50,6 @@ public class App {
 			}
 
 			int rowno = 1;
-
 			for (String repo : info.keySet()) {
 				HashMap<String, Integer> langMap=info.get(repo);
 				boolean flag=true;
@@ -66,8 +63,8 @@ public class App {
 				}
 			}
 			
-			File newFile=new File("/home/ongraph/software/test files/Hash.xlsx");
-			FileOutputStream file = new FileOutputStream("/home/ongraph/software/test files/"+userName+".xlsx");
+			File newFile=new File("./"+userName+".xlsx");
+			FileOutputStream file = new FileOutputStream("./"+userName+".xlsx");
 			workbook.write(file);
 			file.close();
 			System.out.println("Data Copied to Excel");
@@ -83,7 +80,6 @@ public class App {
 		try {
 			data = getJSON(url);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -113,7 +109,7 @@ public class App {
 					String authPath = (String) item.get("path");
 					if (authPath == null)
 						continue;
-					//repo/folder1/folder2/file.py
+					
 					int idx=authPath.lastIndexOf("/");
 					String fileName="";
 					if(idx==-1) fileName=authPath;
@@ -127,7 +123,6 @@ public class App {
 				}
 			}
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return langMap;
@@ -135,14 +130,12 @@ public class App {
 	}
 	
 	public static String getJSON(String url) {
-//		String token="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";
 		HttpURLConnection c = null;
 		try {
 			URL u = new URL(url);
 			c = (HttpURLConnection) u.openConnection();
 			c.setRequestMethod("GET");
 			c.setRequestProperty("Content-length", "0");
-//			c.setRequestProperty ("Authorization", token);
 			c.setUseCaches(false);
 			c.setAllowUserInteraction(false);
 			c.connect();
@@ -177,8 +170,3 @@ public class App {
 		return null;
 	}
 }
-//https://api.github.com/repos/Jatin-Suthar/Burgo-Fee/git/trees/master?recursive=1
-/*
- * https://github.com/TheAlgorithms /home/ongraph/software/Jgit Project/clone
- * dir
- */
